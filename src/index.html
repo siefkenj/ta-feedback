@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Tutorial Feedback</title>
+
+	<link rel="stylesheet" href="css/survey.css">
+	<link rel="stylesheet" href="css/main.css">
+	<!-- <script
+			  src="https://code.jquery.com/jquery-2.2.2.min.js"
+			  integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="
+			  crossorigin="anonymous"></script>
+	-->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/survey.jquery.min.js"></script>
+<script>
+var surveyJSON = {
+ pages: [
+  {
+   elements: [
+    {
+     type: "multipletext",
+     items: [
+      {
+       name: "Term",
+       placeHolder: "Fall 2017"
+      },
+      {
+       name: "COURSE",
+       placeHolder: "MAT135",
+       title: "Course"
+      },
+      {
+       name: "TUT",
+       placeHolder: "TUT0101",
+       title: "Tutorial"
+      },
+      {
+       name: "TA",
+       placeHolder: "Smith"
+      }
+     ],
+     name: "tutorialinfo",
+     title: "Tutorial Information"
+    }
+   ],
+   name: "page1"
+  },
+  {
+   elements: [
+    {
+     type: "matrix",
+     columns: [
+      {
+       value: "a",
+       text: "none"
+      },
+      {
+       value: "b",
+       text: "some"
+      },
+      {
+       value: "c",
+       text: "at least half"
+      },
+      {
+       value: "d",
+       text: "almost all"
+      }
+     ],
+     name: "attendence",
+     rows: [
+      {
+       value: "attendence",
+       text: "How many tutorials did you attend?"
+      }
+     ],
+     title: "Attendence"
+    },
+    {
+     type: "panel",
+     elements: [
+      {
+       type: "rating",
+       maxRateDescription: "(poorly paced)",
+       minRateDescription: "(well paced)",
+       name: "pace",
+       title: "Do I discuss material at a reasonable pace?"
+      },
+      {
+       type: "rating",
+       maxRateDescription: "(unprepared)",
+       minRateDescription: "(well prepared)",
+       name: "preperation",
+       title: "Do I appear prepared for tutorial?"
+      },
+      {
+       type: "rating",
+       maxRateDescription: "(poor environment)",
+       minRateDescription: "(great environment)",
+       name: "environment",
+       title: "Do I create a good learning environment?"
+      },
+      {
+       type: "rating",
+       maxRateDescription: "(poor)",
+       minRateDescription: "(excellent)",
+       name: "effectiveness",
+       title: "Overall, how would you rate my effectiveness as a TA?"
+      }
+     ],
+     name: "feedback",
+     title: "Feedback"
+    },
+    {
+     type: "multipletext",
+     items: [
+      {
+       name: "doingwell",
+       title: "What am I doing well?"
+      },
+      {
+       name: "improve",
+       title: "What could I do to improve?"
+      }
+     ],
+     name: "writtenfeedback",
+     title: "Additional Feedback"
+    }
+   ],
+   name: "page2"
+  }
+ ]
+}
+
+function sendDataToServer(survey) {
+    //survey.sendResult('44a9bf83-3f52-4bba-bb3e-8bc75bcea16b');
+	console.log(survey);
+}
+
+var survey = new Survey.Model(surveyJSON);
+$('document').ready(function(){
+	$("#surveyContainer").Survey({
+	    model: survey,
+	    onComplete: sendDataToServer
+	});
+});
+</script>
+</head>
+<body>
+<div id="page">
+	<div id="header" class="clearfix">
+		<p>Tutorial Feedback</p>
+	</div>
+	<div id="surveyContainer"></div>
+	<div id="footer">
+		<p>University of Toronto
+		</p>
+	</div>
+</div>
+</body>
+</html>
