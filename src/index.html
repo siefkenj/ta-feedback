@@ -5,15 +5,24 @@
 	<title>Tutorial Feedback</title>
 
 	<link rel="stylesheet" href="css/survey.css">
-	<link rel="stylesheet" href="css/main.css">
+	<link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
+	<!-- <link rel="stylesheet" href="css/main.css"> -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<!-- <script
 			  src="https://code.jquery.com/jquery-2.2.2.min.js"
 			  integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="
 			  crossorigin="anonymous"></script>
 	-->
+
 	<script src="js/jquery.min.js"></script>
 	<script src="js/survey.jquery.min.js"></script>
 <script>
+// var myCss = {
+//     matrix: {root: "table table-striped"},
+// 		multipletext: {root: "front-page front"} ,
+//     navigationButton: "button btn-lg"
+// };
+// Survey.Survey.cssType = "bootstrap";
 var surveyJSON = {
  pages: [
   {
@@ -137,11 +146,13 @@ function sendDataToServer(survey) {
     //survey.sendResult('44a9bf83-3f52-4bba-bb3e-8bc75bcea16b');
 	console.log(survey);
 }
+// Survey.Survey.cssType = "bootstrap";
+// Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
 
 var survey = new Survey.Model(surveyJSON);
 $('document').ready(function(){
 	$("#surveyContainer").Survey({
-	    model: survey,
+	    model: survey, //css: myCss,
 	    onComplete: sendDataToServer
 	});
 });
@@ -149,9 +160,7 @@ $('document').ready(function(){
 </head>
 <body>
 <div id="page">
-	<div id="header" class="clearfix">
-		<p>Tutorial Feedback</p>
-	</div>
+	<navbar><h1>Tutorial Feedback</h1></navbar>
 	<div id="surveyContainer"></div>
 	<div id="footer">
 		<p>University of Toronto
