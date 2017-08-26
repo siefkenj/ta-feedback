@@ -11,9 +11,32 @@
 			  integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="
 			  crossorigin="anonymous"></script>
 	-->
+	<script src="js/base64js.min.js"></script>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/survey.jquery.min.js"></script>
 <script>
+var term = 
+      {
+       name: "Term",
+       placeHolder: "Fall 2017"
+      },
+    course = 
+      {
+       name: "COURSE",
+       placeHolder: "MAT135",
+       title: "Course"
+      },
+    tut =
+      {
+       name: "TUT",
+       placeHolder: "TUT0101",
+       title: "Tutorial"
+      },
+    ta =
+      {
+       name: "TA",
+       placeHolder: "Smith"
+      };
 var surveyJSON = {
  pages: [
   {
@@ -21,24 +44,7 @@ var surveyJSON = {
     {
      type: "multipletext",
      items: [
-      {
-       name: "Term",
-       placeHolder: "Fall 2017"
-      },
-      {
-       name: "COURSE",
-       placeHolder: "MAT135",
-       title: "Course"
-      },
-      {
-       name: "TUT",
-       placeHolder: "TUT0101",
-       title: "Tutorial"
-      },
-      {
-       name: "TA",
-       placeHolder: "Smith"
-      }
+	     term, course, tut, ta
      ],
      name: "tutorialinfo",
      title: "Tutorial Information"
@@ -133,16 +139,67 @@ var surveyJSON = {
  ]
 }
 
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
 function sendDataToServer(survey) {
     //survey.sendResult('44a9bf83-3f52-4bba-bb3e-8bc75bcea16b');
-	console.log(survey);
+	console.log('completed survey: ', survey.data);
+	var json = JSON.stringify(survey.data);
+	var hash = getParameterByName('hash');
+	$.ajax({
+		url: "submit_feedback.php?hash=" + hash + "&data=" + base64.encode(json),
+		dataType: 'json'
+	}).done(function(data){
+		console.log('submitted feedback and got response: ', data);
+		if (data['status'] == 'OK') {
+		}
+		if (data['status'] == 'ERROR') {
+			console.log('Submitted feedback, and got error: ', data);
+		}
+	}).fail(function(e){
+		console.log("failed to submit feedback", e);
+	}).always(function(){
+	});
 }
 
 var survey = new Survey.Model(surveyJSON);
-$('document').ready(function(){
+var prepareSurvey = function(){
 	$("#surveyContainer").Survey({
 	    model: survey,
 	    onComplete: sendDataToServer
+	});
+};
+
+$('document').ready(function(){
+	var hash = getParameterByName('hash');
+	// attempt to automatically retrieve the TA info
+	$.ajax({
+		url: "info_from_hash.php?hash=" + hash,
+		dataType: 'json'
+	}).done(function(data){
+		console.log('got data', data);
+		if (data['status'] == 'OK') {
+			term.placeHolder = data.term + " " + data.year;
+			course.placeHolder = data.course;
+			tut.placeHolder = data.tutorial;
+			ta.placeHolder = data.ta;
+			survey = new Survey.Model(surveyJSON);
+		}
+		if (data['status'] == 'ERROR') {
+			console.log('Error retrieving data. Got: ', data);
+		}
+	}).fail(function(e){
+		console.log("failed to get tutorial info from hash", e);
+	}).always(function(){
+		prepareSurvey();	
 	});
 });
 </script>
