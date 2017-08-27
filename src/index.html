@@ -5,7 +5,9 @@
 	<title>Tutorial Feedback</title>
 
 	<link rel="stylesheet" href="css/survey.css">
-	<link rel="stylesheet" href="css/main.css">
+	<link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
+	<!-- <link rel="stylesheet" href="css/main.css"> -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<!-- <script
 			  src="https://code.jquery.com/jquery-2.2.2.min.js"
 			  integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="
@@ -15,12 +17,12 @@
 	<script src="js/jquery.min.js"></script>
 	<script src="js/survey.jquery.min.js"></script>
 <script>
-var term = 
+var term =
       {
        name: "Term",
        placeHolder: "Fall 2017"
       },
-    course = 
+    course =
       {
        name: "COURSE",
        placeHolder: "MAT135",
@@ -169,11 +171,13 @@ function sendDataToServer(survey) {
 	}).always(function(){
 	});
 }
+// Survey.Survey.cssType = "bootstrap";
+// Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
 
 var survey = new Survey.Model(surveyJSON);
 var prepareSurvey = function(){
 	$("#surveyContainer").Survey({
-	    model: survey,
+	    model: survey, //css: myCss,
 	    onComplete: sendDataToServer
 	});
 };
@@ -199,16 +203,14 @@ $('document').ready(function(){
 	}).fail(function(e){
 		console.log("failed to get tutorial info from hash", e);
 	}).always(function(){
-		prepareSurvey();	
+		prepareSurvey();
 	});
 });
 </script>
 </head>
 <body>
 <div id="page">
-	<div id="header" class="clearfix">
-		<p>Tutorial Feedback</p>
-	</div>
+	<navbar><h1>Tutorial Feedback</h1></navbar>
 	<div id="surveyContainer"></div>
 	<div id="footer">
 		<p>University of Toronto

@@ -4,12 +4,11 @@
  * License: MIT (http://www.opensource.org/licenses/mit-license.php)
  */
 .sv_window {
-  position: fixed;
   bottom: 3px;
   right: 10px;
   background-color: cadetblue;
   padding: 1px;
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: "Karla", "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -53,10 +52,17 @@
   color: black; }
 
 .sv_main {
-  width: 100%; }
-
-sv_body {
-  margin-bottom: 10px; }
+}
+input[type=radio] {
+    box-sizing: border-box;
+    padding: 0;
+    height: 32px;
+    border: 0px;
+    width: 100%;
+    height: 0.6em;
+}
+#surveyContainer {
+  margin-bottom: 70px; }
 
 .sv_page_empty {
   height: 100px;
@@ -69,14 +75,14 @@ sv_body {
   text-align: center; }
 
 .sv_row {
-  border-bottom: 1px solid #ccc;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2); }
-
+  text-align: center;
+}
 .sv_q {
-  padding: 10px 3px;
+  padding: 50px 3px;
   margin: 0;
   clear: none;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  border: none}
 
 .sv_q_title {
   width: 100%; }
@@ -86,8 +92,17 @@ sv_body {
   color: red; }
 
 .sv_q_matrix {
-  width: 100%;
-  max-width: 100%; }
+  height: auto;
+}
+.sv_row .sv_q_title {
+  font-size: 2.5rem;
+  color: #01bf6f;
+}
+span span {
+  font-size: 2rem;
+}
+
+
   .sv_q_matrix th, .sv_q_matrix td {
     text-align: center;
     vertical-align: central; }
@@ -104,7 +119,9 @@ sv_body {
   display: inline-block; }
 
 .sv_q_rating {
-  display: inline-block; }
+  display: inline-block;
+  font-size: 2rem;
+}
 
 .sv_q_rating > :first-child {
   border-bottom-left-radius: 4px;
@@ -143,3 +160,103 @@ sv_body {
   position: absolute;
   clip: rect(0px, 0px, 0px, 0px);
   pointer-events: none; }
+
+.sv_nav {
+  width: 100%;
+}
+.sv_next_btn, .sv_prev_btn, .sv_complete_btn {
+  width: inherit;
+  background-color: #01bf6f;
+  margin-left: auto ;
+  text-align: center;
+  margin-right: auto !important;
+  font-size: 3rem;
+  padding: 30px;
+}
+.sv_next_btn {
+  position: fixed;
+  bottom: 70px;
+  left: 0;
+}
+
+* {
+  align-content: center;
+  font-family: "Karla", "Helvetica", sans-serif;
+}
+navbar h1 {
+  text-align: center;
+  font-size: 42px;
+  padding: 15px;
+  font-family: "Karla","Neue Haas Grotesk Text", "Helvetica", sans-serif;
+  background-color: black ;
+  color: white;
+}
+h5 {
+  text-align: center;
+}
+h5 span {
+  font-size: 2rem;
+}
+table {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+  margin: auto;
+  vertical-align:bottom;
+  font-size: 3rem;
+  color: #01bf6f;
+  align-self: center;
+}
+tr {
+  margin-bottom: 30px;
+}
+td input {
+  margin-left: 50px !important;
+  padding-left: 20px;
+  text-align: left;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom-color: 1px #01bf6f;
+}
+h4 {
+  text-align: center;
+  font-size: 32px;
+}
+#footer {
+  text-align: center;
+  color:  #01bf6f;
+  background-color: #7a7a7a;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 70px;
+  width: 100%;
+}
+#footer p {
+  font-size: 42px;
+}
+
+.sv_q_matrix {
+  display: inline;
+}
+.sv_q_matrix thead{
+  font-size: 1rem;
+}
+.sv_q_matrix span{
+  font-size: 2rem;
+}
+.sv_q_matrix td:first-child {
+  width: 30%;
+}
+.sv_q_matrix td{
+  text-align: center;
+}
+label {
+  position: relative !important;
+}
+#sq_100 {
+  height: auto;
+}
