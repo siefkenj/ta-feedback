@@ -72,7 +72,23 @@ input[type=radio] {
   #footer p {
     font-size: 42px;
   }
-
+  .sv_q {
+    padding: 50px 3px;
+    margin: 0;
+    clear: none;
+    box-sizing: border-box;
+    border: none
+  }
+  .sv_row {
+    text-align: center;
+  }
+  .sv_row .sv_q_title {
+    font-size: 2.5rem;
+    color: #01bf6f;
+  }
+  .sv_q_rating {
+    font-size: 2rem;
+  }
   .sv_q_matrix {
     display: inline;
   }
@@ -87,6 +103,23 @@ input[type=radio] {
   }
   .sv_q_matrix td{
     text-align: center;
+  }
+  .sv_nav {
+    width: 100%;
+  }
+  .sv_next_btn, .sv_prev_btn, .sv_complete_btn {
+    width: inherit;
+    background-color: #01bf6f;
+    margin-left: auto ;
+    text-align: center;
+    margin-right: auto !important;
+    font-size: 3rem;
+    padding: 30px;
+  }
+  .sv_next_btn {
+    position: fixed;
+    bottom: 70px;
+    left: 0;
   }
   label {
     position: relative !important;
