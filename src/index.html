@@ -2,12 +2,13 @@
 <html>
 <head>
 	<meta charset="utf-8" />
+	<meta name="HandheldFriendly" content="true">
+	<meta name="MobileOptimized" content="320">
+	<meta name="viewport" content="initial-scale=1.0, width=device-width">
 	<title>Tutorial Feedback</title>
 
 	<link rel="stylesheet" href="css/survey.css">
-	<link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
 	<link rel="stylesheet" href="css/app.css">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<!-- <script
 			  src="https://code.jquery.com/jquery-2.2.2.min.js"
 			  integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="
@@ -90,29 +91,29 @@ var surveyJSON = {
      elements: [
       {
        type: "rating",
-       maxRateDescription: "(poorly paced)",
-       minRateDescription: "(well paced)",
+       minRateDescription: "(poorly paced)",
+       maxRateDescription: "(well paced)",
        name: "pace",
        title: "Do I discuss material at a reasonable pace?"
       },
       {
        type: "rating",
-       maxRateDescription: "(unprepared)",
-       minRateDescription: "(well prepared)",
+       minRateDescription: "(unprepared)",
+       maxRateDescription: "(well prepared)",
        name: "preperation",
        title: "Do I appear prepared for tutorial?"
       },
       {
        type: "rating",
-       maxRateDescription: "(poor environment)",
-       minRateDescription: "(great environment)",
+       minRateDescription: "(poor environment)",
+       maxRateDescription: "(great environment)",
        name: "environment",
        title: "Do I create a good learning environment?"
       },
       {
        type: "rating",
-       maxRateDescription: "(poor)",
-       minRateDescription: "(excellent)",
+       minRateDescription: "(poor)",
+       maxRateDescription: "(excellent)",
        name: "effectiveness",
        title: "Overall, how would you rate my effectiveness as a TA?"
       }
@@ -120,20 +121,13 @@ var surveyJSON = {
      name: "feedback",
      title: "Feedback"
     },
-    {
-     type: "multipletext",
-     items: [
-      {
-       name: "doingwell",
-       title: "What am I doing well?"
-      },
-      {
-       name: "improve",
-       title: "What could I do to improve?"
-      }
-     ],
-     name: "writtenfeedback",
-     title: "Additional Feedback"
+    { type: "comment",
+      name: "doingwell",
+      title: "What am I doing well?"
+    },
+    { type: "comment",
+      name: "improve",
+      title: "What could I do to improve?"
     }
    ],
    name: "page2"
