@@ -2,8 +2,6 @@ html, body {
 	width: 100%;
 	margin: 0px;
 	padding: 0px;
-}
-html {
 	box-sizing: border-box;
 }
 *, *:before, *:after {
@@ -14,11 +12,12 @@ body {
 	font-weight: 400;
 	min-height: 100vh;
 	width: 100%;
-	position: absolute;
-	font-size: 14px;
+	font-size: 18px;
 	
 	line-height: 22px;
 	text-rendering: geometricPrecision;
+	display: flex;
+	flex-direction: column;
 }
 navbar, #footer {
 	display: block;
@@ -28,24 +27,68 @@ navbar, #footer {
 	padding: 10px;
 	margin: 0px;
 }
+navbar {
+	margin-bottom: 5px;
+}
 navbar h1 {
 	padding: 0px;
 	margin: 0px;
+	font-size: 1.3em;
 }
-input[type=radio] {
-    box-sizing: border-box;
-    padding: 0;
-    height: 32px;
-    border: 0px;
-    width: 100%;
-    height: 0.6em;
-}
+
 #surveyContainer {
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 5px;
+	padding-right: 5px;
+	max-width: 700px;
+}
+
+.sv_qcbc {
+	display: flex;
+	width: 100%;
+}
+.sv_q_radiogroup {
+	flex-grow: 1;
+	color: white;
+	text-align: center;
+}
+.sv_q_radiogroup:first-child {
+	margin-left: 5px !important;
+}
+.sv_q_radiogroup label {
+	cursor: pointer;
+}
+
+/* this is fragile! It depends on the exact way that survey.js lays out
+radio buttons */
+.sv_q_radiogroup input[type=radio] {
+	display: none;
+}
+.sv_q_radiogroup input[type=radio] ~ span {
+	width: 100%;
+	padding: 2px;
+	display: block !important;
+	margin: 0px !important;
+	border: 1px solid #002a5c;
+	border-radius: 4px;
+    background-color: rgb(51, 122, 183);
+	transition: background .3s;
+}
+.sv_q_radiogroup input[type=radio] ~ span:hover {
+    background-color: rgb(54, 158, 248);
+}
+.sv_q_radiogroup input[type=radio]:checked ~ span {
+    background-color: rgb(76, 175,80);
+}
+
+.sv_q_radiogroup input[type=radio] + span, .sv_q_radiogroup input[type=radio] + span + span {
+	display: none !important;
 }
 
 .sv_row {
 	border: none;
-	padding: 4px;
+	margin-bottom: 5px;
 }
 .sv_q {
 	background-color: #dae2dc;
@@ -53,12 +96,14 @@ input[type=radio] {
 }
 .sv_q_title {
 	color: #002a5c;
+	text-align: center;
 }
 .sv_q_rating {
 	width: 100%;
 	padding-left: 10px;
 	padding-right: 10px;
 	display: flex;
+	flex-direction: row;
 }
 .sv_q_rating_item {
 	flex-grow: 1;
@@ -68,23 +113,53 @@ input[type=radio] {
 	transition: background .3s;
 }
 .sv_q_rating_item:hover {
-	border: 1px solid #002a5c;
+	/* border: 1px solid #002a5c;*/
+	border-collapse: #002a5c;
     background-color: rgb(54, 158, 248);
 }
 .sv_q_rating_item.active {
-	border: 1px solid #002a5c;
+	border-color: #002a5c;
     background-color: rgb(76, 175,80);
 }
 .sv_nav {
     width: 100%;
 	padding: 4px;
+	padding-right: 0px;
+	text-align: right;
 }
+
 input[type=button] {
 	cursor: pointer;
 }
 .sv_next_btn, .sv_prev_btn, .sv_complete_btn {
 	color: white;	  
     background-color: rgb(51, 122, 183);
-	width: 100%;
-	border: none;
+	border: 1px solid #002a5c;
+	border-radius: 4px;
+	font-size: 1em;
+	padding: 5px 28px 5px 28px;
+	display: inline-block;
+	/* override the locally added style=... on the nav elements */
+	margin-right: 0px !important;
+	margin-left: 5px;
+}
+
+@media only screen and (max-width: 520px) {
+	.sv_q_rating {
+		flex-direction: column-reverse;
+	}
+	.sv_q_rating > :first-child {
+		border: 1px solid #002a5c;
+		border-radius: 0px;
+		border-bottom-left-radius: 4px;
+		border-bottom-right-radius: 4px; 
+	}
+	.sv_q_rating > :last-child {
+		border-radius: 0px;
+		border-top-left-radius: 4px;
+		border-top-right-radius: 4px; 
+	}
+	.sv_q_rating_item, .sv_q_rating_time.active {
+		border-bottom: 0px;
+	}
 }

@@ -7,6 +7,7 @@
 	<meta name="viewport" content="initial-scale=1.0, width=device-width">
 	<title>Tutorial Feedback</title>
 
+	
 	<link rel="stylesheet" href="css/survey.css">
 	<link rel="stylesheet" href="css/app.css">
 	<!-- <script
@@ -18,6 +19,8 @@
 	<script src="js/jquery.min.js"></script>
 	<script src="js/survey.jquery.min.js"></script>
 <script>
+	
+// from the surveyjs website
 var term =
       {
        name: "Term",
@@ -57,35 +60,9 @@ var surveyJSON = {
   },
   {
    elements: [
-    {
-     type: "matrix",
-     columns: [
-      {
-       value: "a",
-       text: "none"
-      },
-      {
-       value: "b",
-       text: "some"
-      },
-      {
-       value: "c",
-       text: "at least half"
-      },
-      {
-       value: "d",
-       text: "almost all"
-      }
-     ],
-     name: "attendence",
-     rows: [
-      {
-       value: "attendence",
-       text: "How many tutorials did you attend?"
-      }
-     ],
-     title: "Attendence"
-    },
+	{ type: "radiogroup", name: "attendence", title: "How many tutorials did you attend?", colCount: 0,
+     choices: ["a|None", "b|Some", "c|at least half", "d|almost all"] }
+	,
     {
      type: "panel",
      elements: [
@@ -94,7 +71,7 @@ var surveyJSON = {
        minRateDescription: "(poorly paced)",
        maxRateDescription: "(well paced)",
        name: "pace",
-       title: "Do I discuss material at a reasonable pace?"
+       title: "How is my pacing when I explain material?"
       },
       {
        type: "rating",
