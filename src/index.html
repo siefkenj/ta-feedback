@@ -111,7 +111,36 @@ var surveyJSON = {
   }
  ]
 }
+// Cookie stuff
+function createCookie(name, value, days) {
+    var expires;
 
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toGMTString();
+    } else {
+        expires = "";
+    }
+    document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value) + expires + "; path=/";
+}
+
+function readCookie(name) {
+    var nameEQ = encodeURIComponent(name) + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return decodeURIComponent(c.substring(nameEQ.length, c.length));
+    }
+    return null;
+}
+
+function eraseCookie(name) {
+    createCookie(name, "", -1);
+}
+///////////////////////////////////////////
+	
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
@@ -133,6 +162,7 @@ function sendDataToServer(survey) {
 	}).done(function(data){
 		console.log('submitted feedback and got response: ', data);
 		if (data['status'] == 'OK') {
+			createCookie(hash, 'survey completed', 90)
 		}
 		if (data['status'] == 'ERROR') {
 			console.log('Submitted feedback, and got error: ', data);
@@ -154,7 +184,7 @@ var prepareSurvey = function(){
 };
 
 $('document').ready(function(){
-	var hash = getParameterByName('hash');
+	var hash = getParameterByName('hash') || getParameterByName('h');
 	// attempt to automatically retrieve the TA info
 	$.ajax({
 		url: "info_from_hash.php?hash=" + hash,
@@ -167,6 +197,7 @@ $('document').ready(function(){
 			tut.placeHolder = data.tutorial;
 			ta.placeHolder = data.ta;
 			survey = new Survey.Model(surveyJSON);
+			
 		}
 		if (data['status'] == 'ERROR') {
 			console.log('Error retrieving data. Got: ', data);
@@ -174,7 +205,14 @@ $('document').ready(function(){
 	}).fail(function(e){
 		console.log("failed to get tutorial info from hash", e);
 	}).always(function(){
-		prepareSurvey();
+		if (readCookie(hash)) {
+			console.log('did you want to fill the survey again?')
+			$('#takeAgain').click(function (e){
+				prepareSurvey();
+			});
+		} else {
+			prepareSurvey();
+		}
 	});
 });
 </script>
@@ -182,7 +220,11 @@ $('document').ready(function(){
 <body>
 <div id="page">
 	<navbar><h1>Tutorial Feedback</h1></navbar>
-	<div id="surveyContainer"></div>
+	<div id="surveyContainer">
+		<div id="repeatQuestion">
+			You've already given feedback.  <input id='takeAgain' type="button" class="btn" value="Take Again">
+		</div>
+	</div>
 	<div id="footer">
 		<p>University of Toronto
 		</p>

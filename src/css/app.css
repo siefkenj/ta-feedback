@@ -131,7 +131,7 @@ radio buttons */
 input[type=button] {
 	cursor: pointer;
 }
-.sv_next_btn, .sv_prev_btn, .sv_complete_btn {
+.sv_next_btn, .sv_prev_btn, .sv_complete_btn, .btn {
 	color: white;	  
     background-color: rgb(51, 122, 183);
 	border: 1px solid #002a5c;
