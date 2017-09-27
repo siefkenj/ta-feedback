@@ -155,7 +155,6 @@ function sendDataToServer(survey) {
     //survey.sendResult('44a9bf83-3f52-4bba-bb3e-8bc75bcea16b');
 	console.log('completed survey: ', survey.data);
 	var json = JSON.stringify(survey.data);
-	var hash = getParameterByName('hash');
 	$.ajax({
 		url: "submit_feedback.php?hash=" + hash + "&data=" + base64.encode(json),
 		dataType: 'json'
@@ -183,8 +182,11 @@ var prepareSurvey = function(){
 	});
 };
 
+// global variable `hash`
+var hash;
+
 $('document').ready(function(){
-	var hash = getParameterByName('hash') || getParameterByName('h');
+	hash = getParameterByName('hash') || getParameterByName('h');
 	// attempt to automatically retrieve the TA info
 	$.ajax({
 		url: "info_from_hash.php?hash=" + hash,
